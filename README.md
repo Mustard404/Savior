@@ -27,119 +27,121 @@
 
 ## 🚗 相关预览
 
-[Demo](http://savior.sec404.cn)
-演示账号：admin
-演示密码：Savior@404
+[Demo](http://savior.sec404.cn) 
+演示账号：admin 
+演示密码：Savior@404  
 
 ## ✨ 安装指南
 
-首先将代码clone到本地：git clone https://github.com/Mustard404/Savior.git
+首先将代码clone到本地： 
+git clone https://github.com/Mustard404/Savior.git  
 
 ### Docker部署
 
-我们推荐使用Docker进行部署，相对于源码部署更为简单和快速。
+我们推荐使用Docker进行部署，相对于源码部署更为简单和快速。  
 
-部署前请务必先安装Docker及docker-compose。
+部署前请务必先安装Docker及docker-compose。  
 
-修改配置文件
-首先复制根目录的.env.docker并重命名为.env，修改其中的Email Settings和initial Administrator配置。这两个配置分别控制邮件提醒，以及初始管理帐号密码及邮箱。（务必把邮箱修改为自己邮箱，不然可能会出现非预期错误！）
+修改配置文件  
+首先复制根目录的.env.docker并重命名为.env，修改其中的Email Settings和initial Administrator配置。这两个配置分别控制邮件提醒，以及初始管理帐号密码及邮箱。（务必把邮箱修改为自己邮箱，不然可能会出现非预期错误！）  
 
-一键启动
-docker-compose up -d
-访问http://127.0.0.1:8000即可看到页面。
+一键启动  
+docker-compose up -d  
+访问[http://127.0.0.1:8000](http://127.0.0.1:8000) 即可看到页面。  
 
-修改启动端口
-如果想修改启动端口，可以修改docker-compose.yaml文件中web容器的ports。
+修改启动端口  
+如果想修改启动端口，可以修改docker-compose.yaml文件中web容器的ports。 
 
-默认为8000:8000，比如要修改为8080端口可改为8080:8000。
+默认为8000:8000，比如要修改为8080端口可改为8080:8000。  
 
 ### 手动部署
 
-简单开发环境
-前端环境
-cd app
-yarn && yarn start
-后端环境
-python3 manage.py runserver 0.0.0.0
+简单开发环境  
+前端环境  
+cd app  
+yarn && yarn start  
+后端环境  
+python3 manage.py runserver 0.0.0.0   
 
 ## 📦 使用手册
 
 ### 初始化说明
 
-考虑到安全性，目前用户管理、项目管理托管于Django管理后台。访问http://127.0.0.1:8000/api/admin/即可看到页面（默认账号密码为admin/Savior@404）。
+考虑到安全性，目前用户管理、项目管理托管于Django管理后台。  
+访问[http://127.0.0.1:8000](http://127.0.0.1:8000) 即可看到页面（默认账号密码为admin/Savior@404）。
 
 #### 用户管理
 
-请完善API>用户的Name、Avatar、Autosentmail三个字段，分别控制报告的作者、头像（图片Url）、生成报告后自动发送渗透测试报告到邮箱。
-![](preview/Userinfo.jpg)
+请完善API>用户的Name、Avatar、Autosentmail三个字段，分别控制报告的作者、头像（图片Url）、生成报告后自动发送渗透测试报告到邮箱。 
+![](preview/Userinfo.jpg) 
 
 #### 项目管理
 
-请通过API>Projects进行添加项目，可根据不通项目选择不通的渗透测试报告模板。参数说明：Project logo（项目Logo）、Project center（项目名称）、Project description（项目描述）、Project template（渗透测试报告模板，目前标准模板可使用Demo/demo.docx，后面会介绍自定义模板）
-![](preview/Projects.jpg)
+请通过API>Projects进行添加项目，可根据不通项目选择不通的渗透测试报告模板。参数说明：Project logo（项目Logo）、Project center（项目名称）、Project description（项目描述）、Project template（渗透测试报告模板，目前标准模板可使用Demo/demo.docx，后面会介绍自定义模板） 
+![](preview/Projects.jpg) 
 
 #### 整改设置
 
-访问http://127.0.0.1:8000可进入Savior平台，通过个人设置>整改设置>添加漏洞模板可进行设置漏洞类型、漏洞描述、修复建议从而达到标准化。目前整理了一些通用的修复建议模板，请参考Demo/常规WEB渗透测试漏洞描述及修复方法.docx。
-![](preview/program.jpg)
+访问http://127.0.0.1:8000可进入Savior平台，通过个人设置>整改设置>添加漏洞模板可进行设置漏洞类型、漏洞描述、修复建议从而达到标准化。目前整理了一些通用的修复建议模板，请参考Demo/常规WEB渗透测试漏洞描述及修复方法.docx。  
+![](preview/program.jpg)  
 
 #### 模板参数说明
 
-目前通用的漏洞模板请参考Demo/demo.docx。
-其中word中参数说明如下，也可通过自行创建word替换参数变量自定义渗透测试报告模板。
-{{report_no}}-漏洞编号，通过时间戳自动生成，确保漏洞编号的唯一性。
-{{report_center}}-测试项目，为项目管理中项目名称。
-{{report_systemname}}-系统名称
-{{report_start_time}}-测试开始时间
-{{report_end_time}}-测试结束时间
-{{report_author}}-测试提交人，对应用户管理的Name参数
-{{report_test_url}}-测试Url
-{% for vuls in vuls %}{% if loop.last %}{{loop.length}}{% endif %}{% endfor %}-漏洞个数
-以下漏洞详情请利用{%tr for vuls in vuls %}{%tr endfor %}进行循环遍历。如想列出所有漏洞URL,则使用参数{%tr for vuls in vuls %}{{item.vul_url}}{%tr endfor %}
-{{item.vul_url}}-漏洞Url
-{{item.vul_recurrence}}-漏洞复现
-{{item.vul_level}}-漏洞危险等级
-{{item.vul_describe}}-漏洞描述
-{{item.vul_modify_repair}}-修复建议
+目前通用的漏洞模板请参考Demo/demo.docx。  
+其中word中参数说明如下，也可通过自行创建word替换参数变量自定义渗透测试报告模板  
+{{report_no}}-漏洞编号，通过时间戳自动生成，确保漏洞编号的唯一性  
+{{report_center}}-测试项目，为项目管理中项目名称  
+{{report_systemname}}-系统名称  
+{{report_start_time}}-测试开始时间    
+{{report_end_time}}-测试结束时间    
+{{report_author}}-测试提交人，对应用户管理的Name参数    
+{{report_test_url}}-测试Url 
+{% for vuls in vuls %}{% if loop.last %}{{loop.length}}{% endif %}{% endfor %}-漏洞个数 
+以下漏洞详情请利用{%tr for vuls in vuls %}{%tr endfor %}进行循环遍历。如想列出所有漏洞URL,则使用参数{%tr for vuls in vuls %}{{item.vul_url}}{%tr endfor %}  
+{{item.vul_url}}-漏洞Url  
+{{item.vul_recurrence}}-漏洞复现  
+{{item.vul_level}}-漏洞危险等级 
+{{item.vul_describe}}-漏洞描述  
+{{item.vul_modify_repair}}-修复建议 
 
 ### 创建报告
 
-登入Savior后，选择创建报告功能。
-首先完善报告的基本信息。
-![](preview/report1.jpg)
-选择漏洞管理的添加漏洞功能。选择漏洞类型后，漏洞名称、漏洞描述、修复建议会根据整改设置进行自动联动，并可根据需求进行自定义修改。
-![](preview/report2.jpg)
-注：未提交前请勿刷新也没，此时漏洞详情保存为前端。提交后会自动生成渗透测试报告并进行下载。
-![](preview/report3.jpg)
-打开报告会提示更新域，更新请选择是，再选择更新整个目录，此问题主要是为了更新目录，不然渗透测试报告中目录无法自动更新。
-![](preview/report4.jpg)
-如果在用户管理打开了Autosentmail功能，渗透测试报告会自动发送至我们邮箱，方便转给甲方爸爸。
-![](preview/mail.jpg)
+登入Savior后，选择创建报告功能。  
+首先完善报告的基本信息。  
+![](preview/report1.jpg)  
+选择漏洞管理的添加漏洞功能。选择漏洞类型后，漏洞名称、漏洞描述、修复建议会根据整改设置进行自动联动，并可根据需求进行自定义修改。  
+![](preview/report2.jpg)  
+注：未提交前请勿刷新也没，此时漏洞详情保存为前端。提交后会自动生成渗透测试报告并进行下载。  
+![](preview/report3.jpg)  
+打开报告会提示更新域，更新请选择是，再选择更新整个目录，此问题主要是为了更新目录，不然渗透测试报告中目录无法自动更新。  
+![](preview/report4.jpg)  
+如果在用户管理打开了Autosentmail功能，渗透测试报告会自动发送至我们邮箱，方便转给甲方爸爸。  
+![](preview/mail.jpg) 
 
 ### 漏洞列表
 
-访问Savior平台，选择漏洞列表可进行漏洞统计并进行漏洞复测。其中漏洞包含三个状态（新发现、已修复、未修复）
-![](preview/vuls.jpg)
-通过选择导出数据功能，可将漏洞列表导出为Excle。
-![](preview/vulsdownload.jpg)
+访问Savior平台，选择漏洞列表可进行漏洞统计并进行漏洞复测。其中漏洞包含三个状态（新发现、已修复、未修复）  
+![](preview/vuls.jpg) 
+通过选择导出数据功能，可将漏洞列表导出为Excle。 
+![](preview/vulsdownload.jpg) 
 
 ## 致谢
 
-感谢 [echo503](https://github.com/echo503) 提供的项目帮助 
-感谢 [lp0int](https://github.com/lp0int) 提供的项目帮助 
-项目框架及Docker部署参考[Github-Monitor](https://github.com/VKSRC/Github-Monitor)
+感谢 [echo503](https://github.com/echo503) 提供的项目帮助   
+感谢 [lp0int](https://github.com/lp0int) 提供的项目帮助   
+项目框架及Docker部署参考[Github-Monitor](https://github.com/VKSRC/Github-Monitor) 
 
 ## 后续升级计划
 
-- 用户管理、项目管理迁移至前端；
-- 大数据看板
+- 用户管理、项目管理迁移至前端；  
+- 大数据看板; 
 
 ## 其它说明
 
-此项目为开源项目，如果想进行商业利用，请进行留言联系。
-如果有使用问题，请添加Q群：279876555
+此项目为开源项目，如果想进行商业利用，请进行留言联系。  
+如果有使用问题，请添加Q群：279876555  
 
 ## 打赏
 
-如果该项目对你有所帮助，可以通过以下方式对作者进行打赏。
-![](preview/wppay.png)
+如果该项目对你有所帮助，可以通过以下方式对作者进行打赏。  
+![](preview/wppay.png)  
