@@ -1,0 +1,18 @@
+version: "2"
+services:
+  web:
+    build: .
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:5.7
+    restart: always
+    command: --max_allowed_packet=1073741824 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --init-connect='SET NAMES utf8mb4;'
+    expose:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: Savior@404
+      MYSQL_DATABASE: savior
