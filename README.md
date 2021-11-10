@@ -82,27 +82,27 @@ python3 manage.py runserver 0.0.0.0
 
 #### 整改设置
 
-访问http://127.0.0.1:8000可进入Savior平台，通过个人设置>整改设置>添加漏洞模板可进行设置漏洞类型、漏洞描述、修复建议从而达到标准化。目前整理了一些通用的修复建议模板，请参考Demo/常规WEB渗透测试漏洞描述及修复方法.docx。  
+访问[http://127.0.0.1:8000](http://127.0.0.1:8000) 可进入Savior平台，通过个人设置>整改设置>添加漏洞模板可进行设置漏洞类型、漏洞描述、修复建议从而达到标准化。目前整理了一些通用的修复建议模板，请参考Demo/常规WEB渗透测试漏洞描述及修复方法.docx。  
 ![](preview/program.jpg)  
 
 #### 模板参数说明
 
 目前通用的漏洞模板请参考Demo/demo.docx。  
 其中word中参数说明如下，也可通过自行创建word替换参数变量自定义渗透测试报告模板  
-{{report_no}}-漏洞编号，通过时间戳自动生成，确保漏洞编号的唯一性  
-{{report_center}}-测试项目，为项目管理中项目名称  
-{{report_systemname}}-系统名称  
-{{report_start_time}}-测试开始时间    
-{{report_end_time}}-测试结束时间    
-{{report_author}}-测试提交人，对应用户管理的Name参数    
-{{report_test_url}}-测试Url 
-{% for vuls in vuls %}{% if loop.last %}{{loop.length}}{% endif %}{% endfor %}-漏洞个数 
-以下漏洞详情请利用{%tr for vuls in vuls %}{%tr endfor %}进行循环遍历。如想列出所有漏洞URL,则使用参数{%tr for vuls in vuls %}{{item.vul_url}}{%tr endfor %}  
-{{item.vul_url}}-漏洞Url  
-{{item.vul_recurrence}}-漏洞复现  
-{{item.vul_level}}-漏洞危险等级 
-{{item.vul_describe}}-漏洞描述  
-{{item.vul_modify_repair}}-修复建议 
+- {{report_no}}-漏洞编号，通过时间戳自动生成，确保漏洞编号的唯一性  
+- {{report_center}}-测试项目，为项目管理中项目名称  
+- {{report_systemname}}-系统名称  
+- {{report_start_time}}-测试开始时间    
+- {{report_end_time}}-测试结束时间    
+- {{report_author}}-测试提交人，对应用户管理的Name参数    
+- {{report_test_url}}-测试Url 
+- {% for vuls in vuls %}{% if loop.last %}{{loop.length}}{% endif %}{% endfor %}-漏洞个数 
+- 以下漏洞详情请利用{%tr for vuls in vuls %}{%tr endfor %}进行循环遍历。如想列出所有漏洞URL,则使用参数{%tr for vuls in vuls %}{{item.vul_url}}{%tr endfor %}  
+- {{item.vul_url}}-漏洞Url  
+- {{item.vul_recurrence}}-漏洞复现  
+- {{item.vul_level}}-漏洞危险等级 
+- {{item.vul_describe}}-漏洞描述  
+- {{item.vul_modify_repair}}-修复建议 
 
 ### 创建报告
 
