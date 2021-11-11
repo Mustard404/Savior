@@ -1,6 +1,6 @@
 # 🍋 Savior —— 渗透测试报告辅助生成工具
 
-Mustard404 ![](https://sec404.cn)
+Mustard404 [https://sec404.cn](https://sec404.cn)
 
 ## 🎈 背景
 
