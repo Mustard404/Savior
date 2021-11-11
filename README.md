@@ -27,7 +27,7 @@ Mustard404 [https://sec404.cn](https://sec404.cn)
 
 ## 🚗 相关预览
 
-[Demo http://savior.sec404.cn](http://savior.sec404.cn)   
+Demo :[http://savior.sec404.cn](http://savior.sec404.cn)   
 演示账号：admin  
 演示密码：Savior@404   
 
