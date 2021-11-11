@@ -27,14 +27,14 @@ Mustard404 [https://sec404.cn](https://sec404.cn)
 
 ## 🚗 相关预览
 
-[Demo](http://savior.sec404.cn) 
-演示账号：admin 
-演示密码：Savior@404  
+[Demo](http://savior.sec404.cn)   
+演示账号：admin  
+演示密码：Savior@404   
 
 ## ✨ 安装指南
 
 首先将代码clone到本地： 
-'''git clone https://github.com/Mustard404/Savior.git '''
+```git clone https://github.com/Mustard404/Savior.git ```
 
 ### Docker部署
 
