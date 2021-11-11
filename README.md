@@ -33,7 +33,7 @@ Mustard404 [https://sec404.cn](https://sec404.cn)
 
 ## ✨ 安装指南
 
-首先将代码clone到本地： 
+首先将代码clone到本地：  
 ```git clone https://github.com/Mustard404/Savior.git ```
 
 ### Docker部署
