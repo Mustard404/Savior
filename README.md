@@ -43,41 +43,47 @@ Demo：[http://savior.sec404.cn](http://savior.sec404.cn)
 部署前请务必先安装Docker及docker-compose。  
 
 修改配置文件  
-首先复制根目录的.env.docker并重命名为.env，修改其中的Email Settings和initial Administrator配置。这两个配置分别控制邮件提醒，以及初始管理帐号密码及邮箱。（务必把邮箱修改为自己邮箱，不然可能会出现非预期错误！）  
+首先复制根目录的.env.docker并重命名为.env，修改其中的Email Settings和initial Administrator配置。这两个配置分别控制邮件提醒，以及初始管理帐号密码及邮箱。 同时需要注意以下两点： 
+- 务必把邮箱修改为自己邮箱，不然可能会出现非预期错误！  
+- 如果使用阿里云、腾讯云服务器，请使用smtp的ssl协议，两家云厂商默认封禁了25端口。
 
 一键启动  
 docker-compose up -d  
-访问[http://127.0.0.1:8000](http://127.0.0.1:8000) 即可看到页面。  
+访问 [http://127.0.0.1:8000](http://127.0.0.1:8000)  即可看到页面。  
 
 修改启动端口  
 如果想修改启动端口，可以修改docker-compose.yaml文件中web容器的ports。 
 
 默认为8000:8000，比如要修改为8080端口可改为8080:8000。  
 
-### 手动部署
+### 源码部署
 
 简单开发环境  
 前端环境  
+```
 cd app  
 yarn && yarn start  
+``` 
 后端环境  
-python3 manage.py runserver 0.0.0.0   
+```python3 manage.py runserver 0.0.0.0``` 
 
 ## 📦 使用手册
 
 ### 初始化说明
 
-考虑到安全性，目前用户管理、项目管理托管于Django管理后台。  
-访问[http://127.0.0.1:8000](http://127.0.0.1:8000) 即可看到页面（默认账号密码为admin/Savior@404）。
+其中Savior平台包含两个后台页面。 
+```前台页面：[http://127.0.0.1:8000](http://127.0.0.1:8000)``` 
+```Django管理后台：[http://127.0.0.1:8000/api/admin/](http://127.0.0.1:8000/api/admin/)``` 
+考虑到安全性，目前用户管理、项目管理托管于Django管理后台（主要是这两个模块不会写），其余功能均可通过前台页面实现。  
 
 #### 用户管理
 
-请完善API>用户的Name、Avatar、Autosentmail三个字段，分别控制报告的作者、头像（图片Url）、生成报告后自动发送渗透测试报告到邮箱。 
+访问Django管理后台：[http://127.0.0.1:8000/api/admin/](http://127.0.0.1:8000/api/admin/), 请完善API>用户的Name、Avatar、Autosentmail三个字段，分别控制报告的作者、头像（图片Url）、生成报告后自动发送渗透测试报告到邮箱。 
 ![](preview/Userinfo.jpg) 
 
 #### 项目管理
 
-请通过API>Projects进行添加项目，可根据不通项目选择不通的渗透测试报告模板。参数说明：Project logo（项目Logo）、Project center（项目名称）、Project description（项目描述）、Project template（渗透测试报告模板，目前标准模板可使用Demo/demo.docx，后面会介绍自定义模板） 
+访问Django管理后台：[http://127.0.0.1:8000/api/admin/](http://127.0.0.1:8000/api/admin/)，请通过API>Projects进行添加项目，可根据不通项目选择不通的渗透测试报告模板。参数说明：Project logo（项目Logo）、Project center（项目名称）、Project description（项目描述）、Project template（渗透测试报告模板，目前标准模板可使用Demo/demo.docx，后面会介绍自定义模板） 
 ![](preview/Projects.jpg) 
 
 #### 整改设置
@@ -106,17 +112,16 @@ python3 manage.py runserver 0.0.0.0
 
 ### 创建报告
 
-登入Savior后，选择创建报告功能。  
+如果我们完善了用户信息、项目管理、整改设置后，就可以通过前端页面进行创建报告，其大概流程如下： 
 首先完善报告的基本信息。  
 ![](preview/report1.jpg)  
 选择漏洞管理的添加漏洞功能。选择漏洞类型后，漏洞名称、漏洞描述、修复建议会根据整改设置进行自动联动，并可根据需求进行自定义修改。  
 ![](preview/report2.jpg)  
-注：未提交前请勿刷新也没，此时漏洞详情保存为前端。提交后会自动生成渗透测试报告并进行下载。  
+注：未提交前请勿刷新页面，此时漏洞详情保存为前端。提交后会自动生成渗透测试报告并进行下载。  
 ![](preview/report3.jpg)  
 打开报告会提示更新域，更新请选择是，再选择更新整个目录，此问题主要是为了更新目录，不然渗透测试报告中目录无法自动更新。  
 ![](preview/report4.jpg)  
 如果在用户管理打开了Autosentmail功能，渗透测试报告会自动发送至我们邮箱，方便转给甲方爸爸。  
-![](preview/mail.jpg) 
 
 ### 漏洞列表
 
