@@ -82,7 +82,7 @@ yarn && yarn start
 ``` 
 后端环境  
 ```
-python3 manage.py runserver 0.0.0.0 
+python3 manage.py runserver 0.0.0.0:8000 
 ```  
 
 ## 📦 使用手册
