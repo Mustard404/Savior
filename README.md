@@ -157,13 +157,15 @@ python3 manage.py runserver 0.0.0.0
 
 如果在用户管理打开了Autosentmail功能，渗透测试报告会自动发送至我们邮箱，方便转给甲方爸爸。  
 
+![](preview/Mail.png) 
+
 ### 漏洞列表
 
 访问Savior平台，选择漏洞列表可进行漏洞统计并进行漏洞复测。其中漏洞包含三个状态（新发现、已修复、未修复）  
 
 ![](preview/vul.png)  
 
-通过选择导出数据功能，可将漏洞列表导出为Excle。 
+通过选择导出数据功能，可将漏洞列表导出为Excle。  
 
 ![](preview/vul_download.png) 
 
@@ -175,8 +177,8 @@ python3 manage.py runserver 0.0.0.0
 
 ## 后续升级计划
 
-- 用户管理、项目管理迁移至前端；  
-- 大数据看板; 
+- 用户管理、项目管理迁移至前端  
+- 大数据看板
 
 ## 其它说明
 
