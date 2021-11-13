@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🍋 Savior 渗透测试报告辅助生成工具  
+# 🍋 Savior 渗透测试报告自动生成工具  
 
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](./LICENSE)
 [![](https://img.shields.io/badge/python-3.5+-yellow.svg)](https://www.python.org/)
