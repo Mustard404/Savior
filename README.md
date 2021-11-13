@@ -96,7 +96,8 @@ yarn && yarn start
 #### 项目管理
 
 访问Django管理后台：[http://127.0.0.1:8000/api/admin/](http://127.0.0.1:8000/api/admin/)，请通过API>Projects进行添加项目，可根据不通项目选择不通的渗透测试报告模板。参数说明：Project logo（项目Logo）、Project center（项目名称）、Project description（项目描述）、Project template（渗透测试报告模板，目前标准模板可使用Demo/demo.docx，后面会介绍自定义模板） 
-![](preview/Projects.jpg) 
+  
+![](preview/Project.png) 
 
 #### 整改设置
 
