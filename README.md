@@ -1,12 +1,21 @@
-# 🍋 Savior —— 渗透测试报告辅助生成工具
+<div align="center">
+# 🍋 Savior 
+## 渗透测试报告辅助生成工具  
+  
+[![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](./LICENSE)
+[![](https://img.shields.io/badge/python-3.5+-yellow.svg)](https://www.python.org/)
+[![](https://img.shields.io/badge/docker-latest-blue.svg)](https://www.docker.com/) 
+  
+Mustard404  
+[https://sec404.cn](https://sec404.cn)  
 
-Mustard404 [https://sec404.cn](https://sec404.cn)
+ </div>
 
 ## 🎈 背景
 
-在安服仔的多个项目中带出来的人经常写的报告不规范，包括报告质量、内容、错别字等。而且每做完一次项目需要单独对项目内容进行统计输出。
+在安服仔的日子里，发现下面的人输出的渗透测试报告结果不规范，主要在报告质量、内容、字体、及修复方案中存在诸多问题，而且大部分安服仔需要对每次的项目结果进行统计整理，方便后续跟踪复测。 
 因此研发了Savior-渗透测试报告辅助生成系统，起这个名字也是为了拯救大多数逗逼渗透测试工程师，告别繁琐的渗透测试报告编写过程及漏洞统计过程。  
-这是一个菜狗🐶通宵一年写的菜鸡🐔项目。。。
+这是一个菜狗🐶通宵一年写的菜鸡🐔项目。。。 
 
 ## ⏰ 系统框架
 
