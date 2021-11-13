@@ -89,8 +89,9 @@ yarn && yarn start
 
 #### 用户管理
 
-访问Django管理后台：[http://127.0.0.1:8000/api/admin/](http://127.0.0.1:8000/api/admin/), 请完善API>用户的Name、Avatar、Autosentmail三个字段，分别控制报告的作者、头像（图片Url）、生成报告后自动发送渗透测试报告到邮箱。 
-![](preview/Userinfo.jpg) 
+访问Django管理后台：[http://127.0.0.1:8000/api/admin/](http://127.0.0.1:8000/api/admin/), 请完善API>用户的Name、Avatar、Autosentmail三个字段，分别控制报告的作者、头像（图片Url）、生成报告后自动发送渗透测试报告到邮箱。
+
+![](preview/Userinfo.png) 
 
 #### 项目管理
 
