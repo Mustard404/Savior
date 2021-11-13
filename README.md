@@ -45,7 +45,9 @@ Demo：[http://savior.sec404.cn](http://savior.sec404.cn)
 ## ✨ 安装指南
 
 首先将代码clone到本地：  
-```git clone https://github.com/Mustard404/Savior.git ```
+```
+git clone https://github.com/Mustard404/Savior.git 
+``` 
 
 ### Docker部署
 
@@ -59,7 +61,9 @@ Demo：[http://savior.sec404.cn](http://savior.sec404.cn)
 - 如果使用阿里云、腾讯云服务器，请使用smtp的ssl协议，两家云厂商默认封禁了25端口。
 
 一键启动  
-```docker-compose up -d```    
+```
+docker-compose up -d 
+```    
 
 访问 [http://127.0.0.1:8000](http://127.0.0.1:8000)  即可看到页面。  
 
@@ -75,7 +79,9 @@ cd app
 yarn && yarn start  
 ``` 
 后端环境  
-```python3 manage.py runserver 0.0.0.0```  
+```
+python3 manage.py runserver 0.0.0.0 
+```  
 
 ## 📦 使用手册
 
