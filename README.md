@@ -160,15 +160,18 @@ python3 manage.py runserver 0.0.0.0
 ### 漏洞列表
 
 访问Savior平台，选择漏洞列表可进行漏洞统计并进行漏洞复测。其中漏洞包含三个状态（新发现、已修复、未修复）  
-![](preview/vuls.jpg) 
+
+![](preview/vul.png)  
+
 通过选择导出数据功能，可将漏洞列表导出为Excle。 
-![](preview/vulsdownload.jpg) 
+
+![](preview/vul_download.png) 
 
 ## 致谢
 
-感谢 [echo503](https://github.com/echo503) 提供的项目帮助   
-感谢 [lp0int](https://github.com/lp0int) 提供的项目帮助   
-项目框架及Docker部署参考[Github-Monitor](https://github.com/VKSRC/Github-Monitor) 
+- 感谢 [echo503](https://github.com/echo503) 提供的项目帮助   
+- 感谢 [lp0int](https://github.com/lp0int) 提供的项目帮助   
+- 项目框架及Docker部署参考[Github-Monitor](https://github.com/VKSRC/Github-Monitor) 
 
 ## 后续升级计划
 
