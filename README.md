@@ -74,16 +74,44 @@ docker-compose up -d
 
 ### 源码部署
 
-简单开发环境  
+所需环境：
+
+- python 3.8+(测试过3.6也没问题，其他版本自行测试)
+- yarn 1.22+
+- [Pandoc](https://www.pandoc.org/installing.html)
+- Mysql 5.7
+
 前端环境  
 ```
 cd app  
-yarn && yarn start  
+yarn && yarn start  http://localhost:8000
 ``` 
+环境变量设置
+创建字符集为utf-8编码的数据库。
+复制**.env.docker**为**.env**，并配置数据库、邮箱、管理员等信息。
+
+- 务必把邮箱修改为自己邮箱，不然可能会出现非预期错误！  
+- 如果使用阿里云、腾讯云服务器，请使用smtp的ssl协议，两家云厂商默认封禁了25端口。
+
 后端环境  
 ```
-python3 manage.py runserver 0.0.0.0:8000 
+#开启env环境
+python3 -m venv env
+source env/bin/activate
+#安装依赖
+python -m pip install -r requirements.txt -i http://pypi.doubanio.com/simple --trusted-host pypi.doubanio.com 
+#同步数据库
+python manage.py makemigrations api
+python manage.py migrate
+python manage.py init_admin
+#启动后端
+python manage.py runserver 0.0.0.0:8000
 ```  
+源码部署环境：
+
+- **前台页面：** [http://127.0.0.1:8001](http://127.0.0.1:8001)
+
+- **Django管理后台：** [http://127.0.0.1:8000/api/admin/](http://127.0.0.1:8000/api/admin/)
 
 ## 📦 使用手册
 
