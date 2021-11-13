@@ -155,6 +155,9 @@ python3 manage.py runserver 0.0.0.0
 
 ![](preview/Report4.png)  
 
+
+![](preview/Report5.png)  
+
 如果在用户管理打开了Autosentmail功能，渗透测试报告会自动发送至我们邮箱，方便转给甲方爸爸。  
 
 ![](preview/Mail.png) 
