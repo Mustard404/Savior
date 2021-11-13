@@ -95,7 +95,7 @@ yarn && yarn start
   
 #### 项目管理
 
-访问Django管理后台：[http://127.0.0.1:8000/api/admin/](http://127.0.0.1:8000/api/admin/)，请通过API>Projects进行添加项目，可根据不通项目选择不通的渗透测试报告模板。参数说明：Project logo（项目Logo）、Project center（项目名称）、Project description（项目描述）、Project template（渗透测试报告模板，目前标准模板可使用Demo/demo.docx，如需自定义模板，请参考模版自定义部分） 
+访问Django管理后台：[http://127.0.0.1:8000/api/admin/](http://127.0.0.1:8000/api/admin/)，请通过API>Projects进行添加项目，可根据不通项目选择不通的渗透测试报告模板。参数说明：Project logo（项目Logo）、Project center（项目名称）、Project description（项目描述）、Project template（渗透测试报告模板，目前标准模板可使用Demo/demo.docx，如需自定义模板，请参考*模版自定义*部分） 
   
 ![](preview/Project.png) 
 
@@ -105,24 +105,28 @@ yarn && yarn start
 
 ![](preview/Program.png)  
 
-#### 模板参数说明
+#### 模板自定义
 
-目前通用的漏洞模板请参考Demo/demo.docx。  
-其中word中参数说明如下，也可通过自行创建word替换参数变量自定义渗透测试报告模板  
-- {{report_no}}-漏洞编号，通过时间戳自动生成，确保漏洞编号的唯一性  
-- {{report_center}}-测试项目，为项目管理中项目名称  
-- {{report_systemname}}-系统名称  
-- {{report_start_time}}-测试开始时间    
-- {{report_end_time}}-测试结束时间    
-- {{report_author}}-测试提交人，对应用户管理的Name参数    
-- {{report_test_url}}-测试Url 
-- {% for vuls in vuls %}{% if loop.last %}{{loop.length}}{% endif %}{% endfor %}-漏洞个数 
-- 以下漏洞详情请利用{%tr for vuls in vuls %}{%tr endfor %}进行循环遍历。如想列出所有漏洞URL,则使用参数{%tr for vuls in vuls %}{{item.vul_url}}{%tr endfor %}  
-- {{item.vul_url}}-漏洞Url  
-- {{item.vul_recurrence}}-漏洞复现  
-- {{item.vul_level}}-漏洞危险等级 
-- {{item.vul_describe}}-漏洞描述  
-- {{item.vul_modify_repair}}-修复建议 
+目前根据我经常使用的渗透测试报告模板生成了一个demo版本（请参考/Demo/demo.docx）。当然您也可以根据自己的需求进行模板自定义，其中仅需在WORD模板中进行参数替换，目前Savior中具体参数如下：  
+
+- {{report_no}} - 漏洞编号，通过时间戳自动生成，确保漏洞编号的唯一性  
+- {{report_center}} - 测试项目，为项目管理中项目名称  
+- {{report_systemname}} - 系统名称  
+- {{report_start_time}} - 测试开始时间    
+- {{report_end_time}} - 测试结束时间    
+- {{report_author}} - 测试提交人，对应用户管理的Name参数    
+- {{report_test_url}} - 测试Url 
+- {% for vuls in vuls %}{% if loop.last %}{{loop.length}}{% endif %}{% endfor %} - 漏洞个数 
+
+以下漏洞详情请利用{%tr for vuls in vuls %}{%tr endfor %}进行循环遍历。如想列出所有漏洞URL,则使用参数{%tr for vuls in vuls %}{{item.vul_url}}{%tr endfor %}  
+
+- {{item.vul_url}} - 漏洞Url  
+- {{item.vul_recurrence}} - 漏洞复现  
+- {{item.vul_level}} - 漏洞危险等级 
+- {{item.vul_describe}} - 漏洞描述  
+- {{item.vul_modify_repair}} - 修复建议 
+
+*注：* Savior平台渗透测试模板遵循Jinja2语法，更多内容请参考[https://jinja.palletsprojects.com/en/3.0.x/](https://jinja.palletsprojects.com/en/3.0.x/)
 
 ### 创建报告
 
