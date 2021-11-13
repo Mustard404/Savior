@@ -84,7 +84,7 @@ docker-compose up -d
 前端环境  
 ```
 cd app  
-yarn && yarn start  http://localhost:8000
+yarn && yarn start:no-mock
 ``` 
 环境变量设置
 创建字符集为utf-8编码的数据库。
