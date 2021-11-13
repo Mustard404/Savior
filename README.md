@@ -47,7 +47,7 @@
 
 首先将代码clone到本地：  
 ```
-git clone https://github.com/Mustard404/Savior.git 
+git clone https://github.com/Mustard404/Savior.git
 ``` 
 
 ### Docker部署
