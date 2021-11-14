@@ -72,6 +72,9 @@ docker-compose up -d
 修改启动端口  
 如果想修改启动端口，可以修改docker-compose.yaml文件中web容器的ports。 默认为8000:8000，比如要修改为8080端口可改为8080:8000。  
 
+不知道为啥好多人部署出现登入500错误，请一定要检查邮箱配置正确！！！！！！！
+[Savior部署指南视频](https://www.bilibili.com/video/BV1QL4y1v7gg/) 
+
 ### 源码部署
 
 所需环境：
