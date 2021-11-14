@@ -73,7 +73,8 @@ docker-compose up -d
 如果想修改启动端口，可以修改docker-compose.yaml文件中web容器的ports。 默认为8000:8000，比如要修改为8080端口可改为8080:8000。  
 
 不知道为啥好多人部署出现登入500错误，请一定要检查邮箱配置正确！！！！！！！  
-<iframe src="//player.bilibili.com/player.html?aid=849190701&bvid=BV1QL4y1v7gg&cid=442078945&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+[https://www.bilibili.com/video/BV1QL4y1v7gg?share_source=copy_web](https://www.bilibili.com/video/BV1QL4y1v7gg?share_source=copy_web)
 
 ### 源码部署
 
