@@ -162,7 +162,7 @@ python manage.py runserver 0.0.0.0:8000
 - {{report_end_time}} - 测试结束时间    
 - {{report_author}} - 测试提交人，对应用户管理的Name参数    
 - {{report_test_url}} - 测试Url 
-- {% for vuls in vuls %}{% if loop.last %}{{loop.length}}{% endif %}{% endfor %} - 漏洞个数 
+- {{vuls|length}} - 漏洞个数 
 
 以下漏洞详情请利用{%tr for vuls in vuls %}{%tr endfor %}进行循环遍历。如想列出所有漏洞URL,则使用参数{%tr for vuls in vuls %}{{item.vul_url}}{%tr endfor %}  
 
