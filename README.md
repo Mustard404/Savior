@@ -164,7 +164,7 @@ python manage.py runserver 0.0.0.0:8000
 - {{report_test_url}} - 测试Url 
 - {{vuls|length}} - 漏洞个数 
 
-以下漏洞详情请利用{%tr for vuls in vuls %}{%tr endfor %}进行循环遍历。如想列出所有漏洞URL,则使用参数{%tr for vuls in vuls %}{{item.vul_url}}{%tr endfor %}  
+以下漏洞详情请利用{%tr for item in vuls %}{%tr endfor %}进行循环遍历。如想列出所有漏洞URL,则使用参数{%tr for item in vuls %}{{item.vul_url}}{%tr endfor %}     
 
 - {{item.vul_url}} - 漏洞Url  
 - {{item.vul_recurrence}} - 漏洞复现  
