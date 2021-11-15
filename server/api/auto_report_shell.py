@@ -34,11 +34,21 @@ def datetimeformat(value):
     return local_date_str
 
 
+#漏洞统计
+def vul_statistics(value,x):
+    num=0
+    print(x)
+    for i in value:
+        if(i['vul_level']==str(x)):
+            num=num+1
+    return num
+
 def auto_report(data, project_template) :
     tpl = DocxTemplate(project_template)
     context = data
     jinja_env = jinja2.Environment()
     jinja_env.filters['datetimeformat'] = datetimeformat
+    jinja_env.filters['vul_statistics'] = vul_statistics
     tpl.render(context, jinja_env,  autoescape=True)
     #替换漏洞详情
     vuls = {}
