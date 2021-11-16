@@ -26,6 +26,18 @@ export async function updateRule(params) {
   });
 }
 
+/** 删除漏洞 DELETE /api/vul/ */
+
+export async function deleteRule(params) {
+  console.log(params)
+  return request('/api/vul/'+ params.id + '/', {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('access')}`
+    },
+  });
+}
+
 /** 导出漏洞列表 GET /api/vul/ */
 export async function vuldownload() {
   return request('/api/vul_download/', {
