@@ -166,8 +166,9 @@ python manage.py runserver 0.0.0.0:8000
 - {{vuls|vul_statistics(3)}} - 高危漏洞个数
 - {{vuls|vul_statistics(2)}} - 中危漏洞个数
 - {{vuls|vul_statistics(1)}} - 低危漏洞个数
-- {% if vuls|vul_statistics(3) >=2 %}紧急状态{% elif vuls|vul_statistics(2) >2 %}紧急状态{% elif vuls|vul_statistics(3) ==1 %}严重状态{% elif vuls|vul_statistics(2) ==2 %}严重状态{% elif vuls|vul_statistics(1) ==0 and vuls|vul_statistics(2) ==0 and vuls|vul_statistics(3) ==0 %}良好状态{% else %}预警状态{% endif %} - 整体风险评级  
-- 以下漏洞详情请利用{%tr for item in vuls %}{%tr endfor %}进行循环遍历。如想列出所有漏洞URL,则使用参数{%tr for item in vuls %}{{item.vul_url}}{%tr endfor %} 感谢[decadecaomm](https://github.com/decadecaomm)提供相关逻辑     
+- {% if vuls|vul_statistics(3) >=2 %}紧急状态{% elif vuls|vul_statistics(2) >2 %}紧急状态{% elif vuls|vul_statistics(3) ==1 %}严重状态{% elif vuls|vul_statistics(2) ==2 %}严重状态{% elif vuls|vul_statistics(1) ==0 and vuls|vul_statistics(2) ==0 and vuls|vul_statistics(3) ==0 %}良好状态{% else %}预警状态{% endif %} - 整体风险评级 感谢[decadecaomm](https://github.com/decadecaomm)提供相关逻辑  
+
+- 以下漏洞详情请利用{%tr for item in vuls %}{%tr endfor %}进行循环遍历。如想列出所有漏洞URL,则使用参数{%tr for item in vuls %}{{item.vul_url}}{%tr endfor %}      
 
 - {{item.vul_url}} - 漏洞Url  
 - {{item.vul_recurrence}} - 漏洞复现  
