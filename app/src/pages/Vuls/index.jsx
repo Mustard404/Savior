@@ -1,8 +1,8 @@
-import { Button, Dropdown, message, Menu } from 'antd';
+import { Button, Dropdown, message, Menu, Popconfirm } from 'antd';
 import { useRef } from 'react';
 import { DownOutlined, DownloadOutlined  } from '@ant-design/icons';
 import ProTable from '@ant-design/pro-table';
-import { queryvul,  updateRule, vuldownload } from './service';
+import { queryvul, updateRule, deleteRule, vuldownload } from './service';
 
 
 
@@ -31,6 +31,17 @@ const TableList = () => {
     actionRef.current.reload();
     return true;
   };
+
+  //漏洞删除
+  const norepairDelete = async (id) => {
+    const hide = message.loading('正在提交');
+    await deleteRule({ id });
+    hide();
+    message.success('漏洞删除成功！');
+    actionRef.current.reload();
+    return true;
+  };
+
   const columns = [
     {
       title: '所属项目',
@@ -148,6 +159,17 @@ const TableList = () => {
             复测 <DownOutlined />
           </a>
         </Dropdown>,
+        <Popconfirm 
+          key="norepairDelete" 
+          title={`确认删除该漏洞吗?`} 
+          okText="是" 
+          cancelText="否"
+          onConfirm={() => {
+            norepairDelete(record.id);
+          }}
+        >
+            <a>删除</a>
+        </Popconfirm>
         /*
         <a 
           key="download"
