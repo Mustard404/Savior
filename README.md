@@ -214,6 +214,28 @@ python manage.py runserver 0.0.0.0:8000
 
 ![](preview/vul_download.png) 
 
+## 常见问题
+
+- Q：重启容器后，账户丢失。
+
+A：需要docker exec到容器内，修改/Savior/docker/run.sh，按照以下方式将部分代码注释掉。
+```
+#!/bin/bash
+/bin/bash /Savior/docker/wait-for-it.sh -t 0 mysql:3306
+export PYTHONPATH=/Savior/
+#python3 /Savior/manage.py makemigrations api
+#python3 /Savior/manage.py migrate
+#python3 /Savior/manage.py init_admin
+supervisord -n
+```
+- Q：Docker部署后，出现登入500错误。
+
+A：检查.env文件是否创建，并核查邮箱配置是否正确。如果使用云服务器，请务必使用smp的SSL协议端口。
+
+- Q：生成报告后，漏洞复线内容为空。
+
+A：根据反馈大部分情况是因为使用了WPS导致，建议使用Office 2013版本以上。
+
 ## 致谢
 
 - 感谢 [echo503](https://github.com/echo503) 提供的项目帮助   
