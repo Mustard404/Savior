@@ -11,6 +11,7 @@ import os
 from email.header import make_header
 from dotenv import load_dotenv
 from pathlib import Path
+from PIL import Image
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(dotenv_path=os.path.join(BASE_DIR, '.', '.env'), override=True)
@@ -63,7 +64,11 @@ def auto_report(data, project_template) :
         imageno = data['vuls'][i]['image']
         for k in range(0, imageno):
             imageid = data["vuls"][i]["vul_recurrence"].replace('{','').replace('}','') + '_img_' + str(k)
-            a = InlineImage(tpl, './output/image/'+ imageid +'.png', )
+            img = Image.open('./output/image/'+ imageid +'.png')
+            if img.width>674:
+                a = InlineImage(tpl, './output/image/'+ imageid +'.png', width=Mm(140))
+            else:
+                a = InlineImage(tpl, './output/image/'+ imageid +'.png', )
             images[imageid] = a
     tpl.render(images)
     reportname = 'output/report/'+ data['report_center'] + '_' + data['report_systemname'] + '_No' + str(data['report_no']) +'.docx'
