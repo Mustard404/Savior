@@ -22,5 +22,6 @@ urlpatterns = [
     path('api/userinfo/', views.Userinfo_view),
     path('api/currentuser/', views.currentUser_view),
     path('api/vul_download/', views.vul_download),
+    path('api/vuls_download/', views.vuls_download),
 ]
 

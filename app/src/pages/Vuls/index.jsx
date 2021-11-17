@@ -2,7 +2,7 @@ import { Button, Dropdown, message, Menu, Popconfirm } from 'antd';
 import { useRef } from 'react';
 import { DownOutlined, DownloadOutlined  } from '@ant-design/icons';
 import ProTable from '@ant-design/pro-table';
-import { queryvul, updateRule, deleteRule, vuldownload } from './service';
+import { queryvul, updateRule, deleteRule, vuldownload, vulsdownload } from './service';
 
 
 
@@ -28,6 +28,15 @@ const TableList = () => {
     await updateRule({ id, vul_status });
     hide();
     message.error('复测成功，未修复！');
+    actionRef.current.reload();
+    return true;
+  };
+
+  //漏洞下载
+  const norepairDownload = async (values) => {
+    const hide = message.loading('正在提交');
+    await vuldownload(values);
+    hide();
     actionRef.current.reload();
     return true;
   };
@@ -159,13 +168,21 @@ const TableList = () => {
             复测 <DownOutlined />
           </a>
         </Dropdown>,
+        <a 
+          key="download"
+          onClick={() => {
+            norepairDownload(record);
+          }}
+        >
+          下载
+        </a>,
         <Popconfirm 
           key="norepairDelete" 
           title={`确认删除该漏洞吗?`} 
           okText="是" 
           cancelText="否"
           onConfirm={() => {
-            norepairDelete(record.id);
+            norepairDelete(record);
           }}
         >
             <a>删除</a>
@@ -193,7 +210,7 @@ const TableList = () => {
       request={queryvul}
       columns={columns}
       toolBarRender={() => [
-        <Button type="primary" icon={<DownloadOutlined />} key="out" onClick={vuldownload}>
+        <Button type="primary" icon={<DownloadOutlined />} key="out" onClick={vulsdownload}>
           导出数据
         </Button>,
       ]}

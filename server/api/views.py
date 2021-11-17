@@ -9,12 +9,13 @@ from api.serializers import LoginSerializer, ProjectSerializer, ProgramSerialize
 from rest_framework import viewsets, permissions
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
 from api.auto_report_shell import auto_report
 from django_filters import rest_framework as filters
 from api.filter import VulFilter
-import xlwt
 from django.http import HttpResponse
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view, permission_classes
+import xlwt
 import datetime
 
 
@@ -131,14 +132,25 @@ class VulViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.DjangoFilterBackend]
     filterset_class = VulFilter
 
-#导出漏洞列表到excel
-from django.http import HttpResponse
-from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated
-from rest_framework.decorators import api_view, permission_classes
-@api_view(['GET'])
+
+#导出渗透测试报告
+@api_view(['POST'])
 @permission_classes((IsAuthenticated, ))
 
 def vul_download(request):
+    data = request.data
+    file_path = 'output/report/'+ data['report_center'] + '_' +data['report_systemname'] + '_No' + str(data['report_no']) +'.docx'
+    response = FileResponse(open(file_path, 'rb'))
+    response['Content-Type'] = "application/octet-stream"
+    response['Content-Disposition'] = 'attachment;filename=' + quote(os.path.basename(file_path))
+
+    return response
+    
+#导出漏洞统计表到excel
+@api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
+
+def vuls_download(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="Savior_Vul_{0}.xls"'.format(
         datetime.datetime.now().strftime('%Y-%m-%d'))

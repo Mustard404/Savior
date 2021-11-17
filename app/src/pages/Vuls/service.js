@@ -38,9 +38,30 @@ export async function deleteRule(params) {
   });
 }
 
-/** 导出漏洞列表 GET /api/vul/ */
-export async function vuldownload() {
+/** 历史漏洞下载 POST /api/vul_download/ */
+export async function vuldownload(params) {
   return request('/api/vul_download/', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('access')}`
+    },
+    data: params,
+    responseType : 'blob',
+  }).then((res) => {
+    console.log(params)
+    let url = URL.createObjectURL(new Blob([res]));
+    let filename = params.report_center + '_' + params.report_systemname + '_No' + params.report_no + '.docx';
+    let a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+}
+
+/** 导出漏洞列表 GET /api/vul/ */
+export async function vulsdownload() {
+  return request('/api/vuls_download/', {
     headers: {
       'Authorization': `Bearer ${localStorage.getItem('access')}`
     },
