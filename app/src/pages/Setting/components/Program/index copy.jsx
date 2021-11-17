@@ -1,48 +1,56 @@
 import React, { useState } from 'react';
-import { PlusOutlined } from '@ant-design/icons';
-import { Avatar, Button, Card, Col, List, message, Modal } from 'antd';
+import {  PlusOutlined } from '@ant-design/icons';
+import { Button, Col, Card, List, Modal, Pagination } from 'antd';
 import { useRequest } from 'umi';
-import OperationModal from './components/OperationModal';
-import { addProject, queryProject, removeFakeList, updateFakeList } from './service';
+import AddModal from './components/AddModal.jsx';
+import UpdateModal from './components/UpdateModal.jsx';
+import { addProgram, queryProgram, removeProgram, updateProgram } from './service';
 import styles from './style.less';
+import Ellipsis from 'react-ellipsis-component';
 
-const waitTime = (time = 100) => {
-  return new Promise((resolve) => {
-      setTimeout(() => {
-          resolve(true);
-      }, time);
-  });
-};
 
-export const ProjectView = () => {
+export const ProgramView = () => {
   const [done, setDone] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [addvisible, setAddvisible] = useState(false);
+  const [updatevisible, setUpdatevisible] = useState(false);
   const [current, setCurrent] = useState(undefined);
-
+  /*
+  const {
+    data: listData,
+    loading,
+    mutate,
+  } = useRequest(() => {
+    return queryProgram();
+  });
+  */
   const { data, loading, pagination } = useRequest(
     ({ current, pageSize }) =>
-      queryProject({
+      queryProgram({
         current,
         pageSize,
       }),
     {
-      formatResult: res => res,
       paginated: true,
     },
   );
-
+  
 
   const { run: postRun } = useRequest(
+    
     (method, params) => {
       if (method === 'remove') {
-        return removeFakeList(params);
+        removeProgram(params);
+        return queryProgram();
+        //location.reload() 
       }
-
       if (method === 'update') {
-        return updateFakeList(params);
+        updateProgram(params);
+        return queryProgram();
       }
-
-      return addProject(params);
+      if (method === 'add') {
+        addProgram(params);
+        return queryProgram();
+      }
     },
     {
       manual: true,
@@ -53,7 +61,7 @@ export const ProjectView = () => {
   );
 
   const showEditModal = (item) => {
-    setVisible(true);
+    setUpdatevisible(true);
     setCurrent(item);
   };
 
@@ -75,15 +83,23 @@ export const ProjectView = () => {
 
   const handleDone = () => {
     setDone(false);
-    setVisible(false);
+    setAddvisible(false);
+    setUpdatevisible(false);
     setCurrent({});
   };
-
-  const handleSubmit = (values) => {
+  
+  const addhandleSubmit = (values) => {
     setDone(true);
-    const method = values?.id ? 'update' : 'add';
+    const method = 'add';
     postRun(method, values);
-  };
+  }
+  const updatehandleSubmit = (values) => {
+    setDone(true);
+    const method = 'update';
+    postRun(method, values);
+  }
+
+  const [expandedRowKeys, setExpandedRowKeys] = useState([]);
 
   return (
     <div>
@@ -101,8 +117,7 @@ export const ProjectView = () => {
           <Button
             type="dashed"
             onClick={() => {
-              //setVisible(true);
-              message.warning("请访问管理后台修改项目设置!(主要因为作者不会写)");
+              setAddvisible(true);
             }}
             style={{
               width: '100%',
@@ -110,18 +125,19 @@ export const ProjectView = () => {
             }}
           >
             <PlusOutlined />
-            添加项目
+            添加漏洞模板
           </Button>
           <List
             size="large"
             rowKey="id"
             loading={loading}
-            pagination={pagination}
-            dataSource={data?.data}
+            pagination={{
+              defaultPageSize: 10,
+              showSizeChanger: true,
+            }}
+            dataSource={data}
             renderItem={(item) => (
-              
               <List.Item
-                /*
                 actions={[
                   <a
                     key="edit"
@@ -142,32 +158,46 @@ export const ProjectView = () => {
                     删除
                   </a>,
                 ]}
-                */
+                expandable={{ expandedRowKeys, onExpandedRowsChange: setExpandedRowKeys }}
               >
-                <Col span={10}>
-                  <List.Item.Meta
-                    avatar={<Avatar src={item.project_logo} shape="square" size="large" />}
-                    title={item.project_center}
-                    description={item.project_description}
-                  />
+                <Col span={4}>
+                  <List.Item.Meta title={item.program_type} description={<strong>{item.program_vul_name}</strong>} />
                 </Col>
-                <Col span={6}>
-                  <List.Item.Meta title="项目模板" description={item.project_template_name} />
+
+                <Col span={12}>
+                  <List.Item.Meta title="修复建议：" description={<Ellipsis text={item.program_repair} maxLine="3"/>} />
                 </Col>
               </List.Item>
             )}
           />
+          <Pagination
+            {...pagination}
+            showQuickJumper
+            showSizeChanger
+            onShowSizeChange={pagination.onChange}
+            style={{
+              marginTop: 16,
+              textAlign: 'right',
+            }}
+          />
         </Card>
       </div>
-      <OperationModal
+      <AddModal
         done={done}
-        visible={visible}
+        visible={addvisible}
         current={current}
         onDone={handleDone}
-        onSubmit={handleSubmit}
+        onSubmit={addhandleSubmit}
+      />
+      <UpdateModal
+        done={done}
+        visible={updatevisible}
+        current={current}
+        onDone={handleDone}
+        onSubmit={updatehandleSubmit}
       />
     </div>
   );
 };
 
-export default ProjectView;
+export default ProgramView;

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import {  PlusOutlined } from '@ant-design/icons';
-import { Button, Col, Card, List, Modal } from 'antd';
+import { Button, Col, Card, List, Modal, Pagination } from 'antd';
 import { useRequest } from 'umi';
+import ProList from '@ant-design/pro-list';
 import AddModal from './components/AddModal.jsx';
 import UpdateModal from './components/UpdateModal.jsx';
 import { addProgram, queryProgram, removeProgram, updateProgram } from './service';
@@ -14,13 +15,19 @@ export const ProgramView = () => {
   const [addvisible, setAddvisible] = useState(false);
   const [updatevisible, setUpdatevisible] = useState(false);
   const [current, setCurrent] = useState(undefined);
-  const {
-    data: listData,
-    loading,
-    mutate,
-  } = useRequest(() => {
-    return queryProgram();
-  });
+
+  const { data, loading, pagination } = useRequest(
+    ({ current, pageSize }) =>
+      queryProgram({
+        current,
+        pageSize,
+      }),
+    {
+      formatResult: res => res,
+      paginated: true,
+    },
+  );
+  
 
   const { run: postRun } = useRequest(
     
@@ -46,13 +53,6 @@ export const ProgramView = () => {
       },
     },
   );
-  const list = listData || [];
-  const paginationProps = {
-    showSizeChanger: true,
-    showQuickJumper: true,
-    pageSize: 20,
-    total: list.length,
-  };
 
   const showEditModal = (item) => {
     setUpdatevisible(true);
@@ -125,8 +125,8 @@ export const ProgramView = () => {
             size="large"
             rowKey="id"
             loading={loading}
-            pagination={paginationProps}
-            dataSource={list}
+            pagination={pagination}
+            dataSource={data?.data}
             renderItem={(item) => (
               <List.Item
                 actions={[

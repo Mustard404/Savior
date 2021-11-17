@@ -16,7 +16,6 @@ export async function queryvul(params) {
 /** 更新漏洞状态 PUT /api/vul/ */
 
 export async function updateRule(params) {
-  console.log(params)
   return request('/api/vul/'+ params.id + '/', {
     method: 'PUT',
     headers: {
@@ -29,7 +28,7 @@ export async function updateRule(params) {
 /** 删除漏洞 DELETE /api/vul/ */
 
 export async function deleteRule(params) {
-  console.log(params)
+  console.log(params.id)
   return request('/api/vul/'+ params.id + '/', {
     method: 'DELETE',
     headers: {

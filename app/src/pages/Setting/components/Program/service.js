@@ -34,7 +34,6 @@ export async function removeProgram(params) {
 //更新漏洞整改方案
 export async function updateProgram(params) {
   const { ...restParams } = params;
-  console.log(restParams)
   return request('/api/program/' + params.id + '/', {
     method: 'PUT',
     headers: {

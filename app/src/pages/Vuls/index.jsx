@@ -44,7 +44,7 @@ const TableList = () => {
   //漏洞删除
   const norepairDelete = async (id) => {
     const hide = message.loading('正在提交');
-    await deleteRule({ id });
+    await deleteRule(id);
     hide();
     message.success('漏洞删除成功！');
     actionRef.current.reload();
