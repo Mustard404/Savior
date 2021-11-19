@@ -406,6 +406,15 @@ const FormAdvancedForm = () => {
 
           <ProForm.Group>
             <ProFormSelect
+              showSearch
+              placeholder="搜索或选择"
+              optionFilterProp="children"
+              filterOption={(input, option) =>
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+              filterSort={(optionA, optionB) =>
+                optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
+              }
               width="md" 
               label="漏洞类型"
               name="vul_type_name"
