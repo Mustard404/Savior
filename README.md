@@ -256,3 +256,22 @@ A：根据反馈大部分情况是因为使用了WPS导致，建议使用Office 
 
 如果该项目对你有所帮助，可以通过以下方式对作者进行打赏。  
 ![](preview/wppay.png)  
+
+## 老年防痴呆专用
+
+### 漏洞修复建议导出
+```
+docker exec -it savior_mysql_1 /bin/bash 
+mysqldump -u root -p  savior api_program > api_program.sql; 
+#输入密码，默认Savior@404 
+exit 
+docker cp   savior_mysql_1:/api_program.sql ~ 
+```
+### 漏洞修复建议导入
+```
+docker cp Demo/api_program.sql savior_mysql_1:/
+mysql -u root -p 
+#输入密码，默认Savior@404 
+use savior; 
+source /api_program.sql; 
+```
