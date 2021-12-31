@@ -279,3 +279,7 @@ mysql -u root -p
 use savior; 
 source /api_program.sql; 
 ```
+
+### Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/Mustard404/Savior.svg)](https://starchart.cc/Mustard404/Savior)
