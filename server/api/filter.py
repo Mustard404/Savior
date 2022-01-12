@@ -10,7 +10,7 @@ class VulFilter(filters.FilterSet):
     report_systemname = django_filters.CharFilter(field_name="vul_no__report_systemname", lookup_expr='icontains')
     report_no = django_filters.CharFilter(field_name="vul_no__report_no", lookup_expr='icontains')
     report_author = django_filters.CharFilter(field_name="vul_no__report_author", lookup_expr='icontains')
-    vul_url = django_filters.CharFilter(field_name="vul_no__report_author", lookup_expr='icontains')
+    #vul_url = django_filters.CharFilter(field_name="vul_no__report_author", lookup_expr='icontains')
 
     class Meta:
 
