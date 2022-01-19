@@ -274,6 +274,7 @@ docker cp   savior_mysql_1:/api_program.sql ~
 ### 漏洞修复建议导入
 ```
 docker cp Demo/api_program.sql savior_mysql_1:/
+docker exec -it savior_mysql_1 /bin/bash 
 mysql -u root -p 
 #输入密码，默认Savior@404 
 use savior; 
