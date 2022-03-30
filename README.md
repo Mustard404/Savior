@@ -1,5 +1,4 @@
 <div align="center">
-# 暂停使用，漏洞修复中，各位部署完成的需暂停公网映射  
 # 🍋 Savior 渗透测试报告自动生成工具   
 
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](./LICENSE)
@@ -10,7 +9,12 @@
 
  </div>
  
+## 重要更新，修复nginx配置错误导致任意文件读取。
+https://github.com/Mustard404/Savior/blob/b72151d6adaa9bf12e284198e0b0b11fb80d6341/docker/savior.conf#L27-L29
+-alias /Savior/static/; 
++alias /Savior/static; 
 
+修改
 
 ##  🛠 作者
 
