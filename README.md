@@ -1,5 +1,5 @@
 <div align="center">
-
+# 暂停使用，漏洞修复中，各位部署完成的需暂停公网映射
 # 🍋 Savior 渗透测试报告自动生成工具  
 
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](./LICENSE)
@@ -10,7 +10,7 @@
 
  </div>
  
-##  😘方便的话麻烦各位老板给个😘star!
+
 
 ##  🛠 作者
 
