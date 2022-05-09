@@ -374,7 +374,6 @@ const FormAdvancedForm = () => {
             search={false}
             toolBarRender={false}
             pagination={false} 
-            name="vuls"
           />
         </ProForm.Item>
         <DrawerForm 
